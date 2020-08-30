@@ -23,7 +23,7 @@ var passport = require('passport')
   var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var Image = mongoose.model('Image');
-
+const dotenv = require('dotenv').config();
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json())
@@ -204,8 +204,8 @@ router.post('/del_request', function(req, res,next) {
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: 'getprvy@gmail.com', // generated ethereal user
-            pass:  'tx8bNZ7LrmVZaK6'// generated ethereal password
+            user: process.env.EMAIL, // generated ethereal user
+            pass: process.env.PASSWORD// generated ethereal password
         },
         tls:{
           rejectUnauthorized:false
@@ -346,8 +346,8 @@ router.post('/del_request', function(req, res,next) {
          port: 587,
          secure: false, // true for 465, false for other ports
          auth: {
-             user: 'getprvy@gmail.com', // generated ethereal user
-             pass:  'tx8bNZ7LrmVZaK6'// generated ethereal password
+             user: process.env.EMAIL, // generated ethereal user
+             pass: process.env.PASSWORD// generated ethereal password
          },
          tls:{
            rejectUnauthorized:false

@@ -24,6 +24,7 @@ var User=mongoose.model('User')
 var cors = require("cors");
 //const fileUpload = require('express-fileupload');
 
+const dotenv = require('dotenv').config();
 
 //app.use(fileUpload());
 
@@ -35,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended : false}))
 
 const corsOptions = {
   credentials: true,
-  origin: "http://localhost:3000"
+  origin: process.env.ORIGIN
 };
 app.use(cors(corsOptions));
 //the middleware use() function of express for serving static files.
@@ -190,7 +191,7 @@ passport.use(new LocalStrategy(
        console.log("User Found  : "+ user.pref_username)
           
              
-             if(user.pref_username === 'admin' && user.email == 'getprvy@gmail.com') {
+             if(user.pref_username === 'admin' && user.email == process.env.EMAIL) {
                  flag = 1;
              } else {
                  flag = 2;

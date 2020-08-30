@@ -27,6 +27,7 @@ app.use(passport.session());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 const nodemailer = require('nodemailer')
+const dotenv = require('dotenv').config();
 
 var flag = 0;
 
@@ -56,8 +57,8 @@ router.get('/',function(req, res,next){
   var newUser = new User({
     firstname: 'admin',
     lastname: 'admin',
-    email: 'getprvy@gmail.com',
-    password: 'tx8bNZ7LrmVZaK6',
+    email: process.env.EMAIL,
+    password: process.env.PASSWORD,
     pref_username: 'admin',
     verified : true
   })
@@ -337,8 +338,8 @@ router.post('/forgot', function(req, res,next) {
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-          user: 'getprvy@gmail.com', // generated ethereal user
-          pass:  'tx8bNZ7LrmVZaK6'// generated ethereal password
+          user: process.env.EMAIL, // generated ethereal user
+          pass: process.env.PASSWORD// generated ethereal password
       },
       tls:{
         rejectUnauthorized:false

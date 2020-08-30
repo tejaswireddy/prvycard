@@ -1,10 +1,7 @@
 var mongoose = require('mongoose');
+const dotenv = require('dotenv').config();
 mongoose.set('useCreateIndex', true);
-//var dburl = 'mongodb://localhost:27017/tappydata';
- //var dburl= 'mongodb+srv://admin:admin@tappy.ulixk.gcp.mongodb.net/Tappy?retryWrites=true&w=majority';
-//var dburl = 'mongodb+srv://admin:pCard123@prvycard.vwkom.mongodb.net/PrvyCard?retryWrites=true&w=majority';
-var dburl = 'mongodb+srv://getprvy:admin@prvycard.j3zij.mongodb.net/PrvyCard?retryWrites=true&w=majority';
-
+var dburl = process.env.DB_URL;
 // mongoose.connect(dburl,{ useNewUrlParser: true })
 
 mongoose
