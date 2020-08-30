@@ -593,7 +593,7 @@ theme1.typography.h1 = {
                     };
                 
                     let getprofileimageurl = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/get_profileimage/?username="+props.match.params.username
-                    let hrefurl = "http://localhost:3000/DisplayProfile/"+props.match.params.username
+                    let hrefurl = process.env.REACT_APP_EXPRESS_ENDPOINT+"/DisplayProfile/"+props.match.params.username
                     return (
                       <MuiThemeProvider theme={theme1}>
                         <div>
