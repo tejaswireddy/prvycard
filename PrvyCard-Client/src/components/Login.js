@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { createBrowserHistory } from "history";
 import axios from 'axios';
+import dotenv from 'dotenv';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -116,8 +117,8 @@ const sendRequest = useCallback(async (username,password) => {
   if(username == "admin" && password=="admin"){
 
       setIsSending(true);
-  //let res = await fetch("http://localhost:8013/login1/?username="+username+"&password="+password,{ method: 'post',  credentials: 'same-origin',});
- let url = "http://localhost:8013/login1/"
+  //let res = await fetch("process.env.REACT_APP_EXPRESS_ENDPOINT+"/login1/?username="+username+"&password="+password,{ method: 'post',  credentials: 'same-origin',});
+ let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/login1/"
 
   axios({
     method: "POST",
@@ -160,7 +161,7 @@ const sendRequest = useCallback(async (username,password) => {
 //if(isSending) return;
   setIsSending(true);
 
- let url = "http://localhost:8013/login1/"
+ let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/login1/"
 
 
   axios({

@@ -54,7 +54,7 @@ import redditImage from '../utils/reddit.jpeg';
 import twitterImage from '../utils/twitter.png';
 import youtubeImage from '../utils/youtube.png';
 import { MuiThemeProvider, createMuiTheme,ThemeProvider } from '@material-ui/core/styles';
-
+import dotenv from 'dotenv';
 
 const history = createBrowserHistory({ forceRefresh: true });
 
@@ -249,7 +249,7 @@ theme1.typography.h1 = {
     
 
     const onLogout= (async () => {
-      let url = "http://localhost:8013/logout/"
+      let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/logout/"
 
       axios({
         method: "GET",
@@ -275,7 +275,7 @@ theme1.typography.h1 = {
     
     function checkisUser(username){
 
-      let url = "http://localhost:8013/get_user";
+      let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/get_user";
 
       axios({
         method: "GET",
@@ -464,7 +464,7 @@ theme1.typography.h1 = {
                 
                 
                 function getProfile(username){
-                let url = "http://localhost:8013/api1/get_profile/?username="+username;
+                let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/get_profile/?username="+username;
                 
                   axios.get(url)
                   .then(response => {
@@ -574,11 +574,11 @@ theme1.typography.h1 = {
                    
                 
                     let imagelocationurl =
-                    "http://localhost:8013/api1/get_imagelocation/?username="+username
+                    process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/get_imagelocation/?username="+username
                     
                      let ll = await axios.get(imagelocationurl)
                    
-                    let url = "http://localhost:8013/api1/get_vcard/?fullname="+FullName+"&username="+username+"&filelocation="+ll.data+"&home="+
+                    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/get_vcard/?fullname="+FullName+"&username="+username+"&filelocation="+ll.data+"&home="+
                     HomePhone+"&cell="+CellPhone+"&email="+Emaill+"&fax="+Faxx+"&linkedin="+LinkedInState+
                     "&twitter="+TwitterState+"&instagram="+InstagramState+"&facebook="+FacebookState+"&country="+Country+"&region="+Region
                     +"&address="+Address+"&bio="+Bio+"&reddit="+Reddit+"&pinterest="+Pinterest+"&Youtube="+
@@ -592,7 +592,7 @@ theme1.typography.h1 = {
                 
                     };
                 
-                    let getprofileimageurl = "http://localhost:8013/api1/get_profileimage/?username="+props.match.params.username
+                    let getprofileimageurl = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/get_profileimage/?username="+props.match.params.username
                     let hrefurl = "http://localhost:3000/DisplayProfile/"+props.match.params.username
                     return (
                       <MuiThemeProvider theme={theme1}>

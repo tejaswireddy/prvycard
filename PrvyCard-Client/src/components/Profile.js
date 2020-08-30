@@ -46,7 +46,7 @@ import twitterImage from '../utils/twitter.png';
 import youtubeImage from '../utils/youtube.png';
 import { MuiThemeProvider, createMuiTheme,ThemeProvider } from '@material-ui/core/styles';
 import { borders } from '@material-ui/system';
-
+import dotenv from 'dotenv';
 
 const theme1 = createMuiTheme({
   palette: {
@@ -256,7 +256,7 @@ function useMergeState(initialState) {
 
 
     const onLogout= useCallback(async () => {
-      let url = "http://localhost:8013/logout/"
+      let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/logout/"
 
       axios({
         method: "GET",
@@ -430,7 +430,7 @@ if(method === "multer"){
  
   setMulterImage(URL.createObjectURL(e.target.files[0]));
   
-  axios.post('http://localhost:8013/api1/uploadmulter/?username='+username,
+  axios.post('process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/uploadmulter/?username='+username,
     imageFormObj).then((data)=>{
     if(data.data.success){
       alert("image uploaded successfully");
@@ -458,7 +458,7 @@ useEffect(() =>{
 },[])
 
 function getProfileImage(username){
-  let url = "http://localhost:8013/api1/get_profileimage/?username="+username;
+  let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/get_profileimage/?username="+username;
 
   axios.get(url).then(response => {
     setMulterImage(Buffer.from(response.data, 'binary').toString('base64'));
@@ -468,7 +468,7 @@ function getProfileImage(username){
 
 function getProfile(username){
      
-let url = "http://localhost:8013/api1/get_profile/?username="+username;
+let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/get_profile/?username="+username;
 
   axios.get(url)
   .then(response => {
@@ -627,7 +627,7 @@ const handleContactChange = (event) => {
     if(isSending) return;
       setIsSending(true);
       let res = await fetch(
-        "http://localhost:8013/api1/update_handle/?username="+props.match.params.username+"&occupation="+
+        process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/update_handle/?username="+props.match.params.username+"&occupation="+
         occupation+"&fullname="+FullName+"&instagram="+InstagramUName+"&twitter="+TwitterUName+
         "&facebook="+FacebookUName+"&youtube="+YoutubeUName+
         "&linkedin="+LinkedInUName+"&reddit="+RedditUName+"&bio="+Bio+"&address="+Address+
@@ -676,7 +676,7 @@ const handleContactChange = (event) => {
 
 
  let hrefurl = "http://localhost:3000/DisplayProfile/"+username
- let getprofileimageurl = "http://localhost:8013/api1/get_profileimage/?username="+username
+ let getprofileimageurl = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/get_profileimage/?username="+username
   return (
     <MuiThemeProvider theme={theme1}>
 

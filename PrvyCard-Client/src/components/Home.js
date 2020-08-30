@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import { createBrowserHistory } from "history";
 import RegisterUser from"../Services/Register";
 import axios from 'axios';
+import dotenv from 'dotenv';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -92,7 +93,7 @@ function timeout(delay) {
 function register(fname,lname,email,uname){
   if(fname != "" && lname !=  "" && email != "" && uname != "")
   {
-    let url = "http://localhost:8013/api/register/?fname=" +fname + "&lname=" + lname+ "&email=" + email + "&pname=" + uname;
+    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/register/?fname=" +fname + "&lname=" + lname+ "&email=" + email + "&pname=" + uname;
 
       const promise =  fetch(url,{ method: 'post'});
       promise.then(()=>{})
@@ -139,7 +140,7 @@ const sendRequest = useCallback(async(fname,lname,email,uname) => {
     
   if(isSending) return;
     setIsSending(true);
-    let url = "http://localhost:8013/api/register/?fname=" +fname + "&lname=" + lname+ "&email=" + email + "&pname=" + uname;
+    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/register/?fname=" +fname + "&lname=" + lname+ "&email=" + email + "&pname=" + uname;
 
     let res = await fetch(url,{ method: 'post'});
     

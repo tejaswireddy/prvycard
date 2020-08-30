@@ -1,5 +1,6 @@
 
 import axios from 'axios';
+import dotenv from 'dotenv';
 
 var RegisterUser = async (
     fname,
@@ -8,7 +9,7 @@ var RegisterUser = async (
     uname
   ) => {
       console.log("hhjhj");
-      let url = "http://localhost:8013/api/register/?fname=" +fname + "&lname=" + lname+ "&email=" + email + "&pname=" + uname;
+      let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/register/?fname=" +fname + "&lname=" + lname+ "&email=" + email + "&pname=" + uname;
     
 
 await axios.post(url)

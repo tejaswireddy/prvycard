@@ -14,9 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { createBrowserHistory } from "history";
 import axios from 'axios';
-
+import dotenv from 'dotenv';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
 
 // Or Create your Own theme:
 const theme = createMuiTheme({
@@ -84,8 +83,8 @@ const useStyles = makeStyles((theme) => ({
 
 function createAccount(firstname,lastname,email,prvycode,username,password){
   if(firstname != "" && lastname != "" && email != "" && prvycode != "" && username != "" && password != ""){
-    
-    let url = "http://localhost:8013/api1/login/?username="+username+"&unique_code="+prvycode+"&password="+password;
+    window.alert(process.env)
+    let url = process.env.EXPRESS_ENDPOINT+"/api1/login/?username="+username+"&unique_code="+prvycode+"&password="+password;
     let res =  fetch(url,{ method: 'post'});
    
     res.then(()=>{})
@@ -136,7 +135,7 @@ export default function SignUp() {
   
   const[isSending,setIsSending] = useState(false);
   const isMounted =useRef(true);
-  
+
   useEffect(() =>{
     //sendRequest(fname,lname,email,uname)
     return () =>{
@@ -148,7 +147,7 @@ export default function SignUp() {
    
     if(isSending) return;
       setIsSending(true);
-      let url = "http://localhost:8013/api1/login/?username="+username+"&unique_code="+prvycode+"&password="+password;
+      let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/login/?username="+username+"&unique_code="+prvycode+"&password="+password;
     
       let result = await fetch(url,{ method: 'post'});
       

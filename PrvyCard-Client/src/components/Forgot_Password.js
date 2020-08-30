@@ -5,6 +5,7 @@ import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
 import { createBrowserHistory } from "history";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import dotenv from 'dotenv';
 
 // Or Create your Own theme:
 const theme = createMuiTheme({
@@ -58,7 +59,7 @@ class Forgot_Password extends Component {
 
         var username = this.state.username;
 
-        let url = "http://localhost:8013/api/forgot/?username="+username;
+        let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/forgot/?username="+username;
 
         axios({
           method: "POST",
@@ -93,7 +94,7 @@ class Forgot_Password extends Component {
         } else {
               console.log("In react");
 
-            let url = "http://localhost:8013/resetPass/"
+            let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/resetPass/"
 
             axios({
                 method: "POST",

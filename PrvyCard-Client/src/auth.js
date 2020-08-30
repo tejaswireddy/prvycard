@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { createBrowserHistory } from "history";
+import dotenv from 'dotenv';
+
 const history = createBrowserHistory({ forceRefresh: true });
+
 
 class Auth {
     constructor()  {
@@ -9,7 +12,7 @@ class Auth {
 
     async getAuth(){
 
-        let url = "http://localhost:8013/get_user/"
+        let url = process.env.EXPRESS_ENDPOINT+"/get_user/"
       
         await axios({
           method: "GET",
@@ -40,7 +43,7 @@ class Auth {
 
     async getAdmin(){
 
-      let url = "http://localhost:8013/get_user/"
+      let url = process.env.EXPRESS_ENDPOINT+"/get_user/"
     
       await axios({
         method: "GET",

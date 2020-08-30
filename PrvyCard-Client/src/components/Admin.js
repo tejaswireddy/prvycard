@@ -30,6 +30,7 @@ import Menu from '@material-ui/core/Menu';
 import { createBrowserHistory } from "history";
 import axios from 'axios';
 import { MuiThemeProvider, createMuiTheme,ThemeProvider } from '@material-ui/core/styles';
+import dotenv from 'dotenv';
 
 const history = createBrowserHistory({ forceRefresh: true });
 var isAuth = false;
@@ -342,7 +343,7 @@ export function MenuAppBar() {
   
 
   const onLogout= (async () => {
-    let url = "http://localhost:8013/logout/"
+    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/logout/"
 
     axios({
       method: "GET",
@@ -368,7 +369,7 @@ export function MenuAppBar() {
   
   function checkisUser(username){
 
-    let url = "http://localhost:8013/get_user";
+    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/get_user";
 
     axios({
       method: "GET",
@@ -463,7 +464,7 @@ export function MenuAppBar() {
 
 function getRecordsToApprove(setRecords){
      
-    let url = "http://localhost:8013/api/admin/";
+    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/admin/";
     let records = [];
     axios.get(url)
     .then(response => {
@@ -487,7 +488,7 @@ function getRecordsToApprove(setRecords){
     console.log(rowNumber);
     console.log(index[0]);
 
-    let url = "http://localhost:8013/api1/del_request/?email="+index[0];
+    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/del_request/?email="+index[0];
     
     axios.post(url)
     .then(response => {
@@ -505,7 +506,7 @@ function getRecordsToApprove(setRecords){
     let code = rowss[finalindex].PrvyCode;
     console.log("rows"+rows);
      console.log("code"+code);
-    let url = "http://localhost:8013/api1/approve_request/?email="+index[0]+"&code="+code;
+    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/approve_request/?email="+index[0]+"&code="+code;
     
     axios.post(url)
     .then(response => {
@@ -530,7 +531,7 @@ export default function EnhancedTable() {
 
   async function verifyAdmin(){
 
-    let url = "http://localhost:8013/get_user/"
+    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/get_user/"
     
     await axios({
       method: "GET",
