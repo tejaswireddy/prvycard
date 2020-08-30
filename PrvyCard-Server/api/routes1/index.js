@@ -204,8 +204,8 @@ router.post('/del_request', function(req, res,next) {
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: 'prvycard@gmail.com', // generated ethereal user
-            pass:  'prvyCard123!@#'// generated ethereal password
+            user: 'getprvy@gmail.com', // generated ethereal user
+            pass:  'tx8bNZ7LrmVZaK6'// generated ethereal password
         },
         tls:{
           rejectUnauthorized:false
@@ -215,7 +215,7 @@ router.post('/del_request', function(req, res,next) {
     var code_string = '<p> Your request is rejected by the admin. Please contact admin support for more details. </p>';
 
     let mailOptions = {
-    from: '"PRVY Card." <prvycard@gmail.com>', // sender address
+    from: '"PRVY Card." <getprvy@gmail.com>', // sender address
     to: email, // list of receivers
     subject: '❗️❗️ PRVY CARD Registration Failure',
     html: code_string
@@ -346,8 +346,8 @@ router.post('/del_request', function(req, res,next) {
          port: 587,
          secure: false, // true for 465, false for other ports
          auth: {
-             user: 'prvycard@gmail.com', // generated ethereal user
-             pass:  'prvyCard123!@#'// generated ethereal password
+             user: 'getprvy@gmail.com', // generated ethereal user
+             pass:  'tx8bNZ7LrmVZaK6'// generated ethereal password
          },
          tls:{
            rejectUnauthorized:false
@@ -357,7 +357,7 @@ router.post('/del_request', function(req, res,next) {
      var code_string = '<p> Thank you for registering with us! Your unique code is ' + code + '. </p>';
  
      let mailOptions = {
-     from: '"PRVY CARD" <prvycard@gmail.com>', // sender address
+     from: '"PRVY CARD" <getprvy@gmail.com>', // sender address
      to: email, // list of receivers
      subject: '✅ PRVY CARD Registration Succesful',
      html: code_string

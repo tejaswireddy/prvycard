@@ -56,8 +56,8 @@ router.get('/',function(req, res,next){
   var newUser = new User({
     firstname: 'admin',
     lastname: 'admin',
-    email: 'prvycard@gmail.com',
-    password: 'admin',
+    email: 'getprvy@gmail.com',
+    password: 'tx8bNZ7LrmVZaK6',
     pref_username: 'admin',
     verified : true
   })
@@ -337,8 +337,8 @@ router.post('/forgot', function(req, res,next) {
       port: 587,
       secure: false, // true for 465, false for other ports
       auth: {
-          user: 'prvycard@gmail.com', // generated ethereal user
-          pass:  'prvyCard123!@#'// generated ethereal password
+          user: 'getprvy@gmail.com', // generated ethereal user
+          pass:  'tx8bNZ7LrmVZaK6'// generated ethereal password
       },
       tls:{
         rejectUnauthorized:false
@@ -348,7 +348,7 @@ router.post('/forgot', function(req, res,next) {
   var code_string = '<p> Your code for password retrieval is  ' + result + '. </p>';
 
   let mailOptions = {
-  from: '"PRVY CARD" <prvycard@gmail.com>', // sender address
+  from: '"PRVY CARD" <getprvy@gmail.com>', // sender address
   to: email, // list of receivers
   subject: '❕❕ PRVY CARD Forgot Password',
   html: code_string

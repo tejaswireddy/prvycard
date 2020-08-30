@@ -1,4 +1,4 @@
-import React,{useEffect,useCallback} from "react";
+import React,{useEffect,useCallback,useState} from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -29,6 +29,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { createBrowserHistory } from "history";
 import axios from 'axios';
+import { MuiThemeProvider, createMuiTheme,ThemeProvider } from '@material-ui/core/styles';
 
 const history = createBrowserHistory({ forceRefresh: true });
 var isAuth = false;
@@ -37,6 +38,50 @@ function createData(FirstName, LastName, Email, UserName, PrvyCode) {
   return { FirstName, LastName, Email, UserName, PrvyCode };
 }
 
+const theme1 = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#212121',
+    },
+    secondary: {
+      main: '#212121',
+    },
+  },
+});
+ 
+
+theme1.typography.h1 = {
+  fontFamily: 'Montserrat, sans-serif',
+  fontWeight: 'bold',
+  color: '#fafafa',
+  fontSize: 19,
+};
+
+  theme1.typography.h3 = {
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'bold',
+    color: '#212121',
+    fontSize: 25,
+  };
+
+  theme1.typography.h4 = {
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'bold',
+      color: '#212121',
+      fontSize: 15,
+  };
+
+  theme1.typography.h5 = {
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'bold',
+      color: '#9e9e9e',
+      fontSize: 15,
+  };
+
+  theme1.typography.text1 = {
+    fontFamily: 'Eczar, serif',
+    fontWeight: 'bold'
+  };
 
 
 const rows = [
@@ -166,7 +211,7 @@ const useToolbarStyles = makeStyles(theme => ({
           backgroundColor: theme.palette.secondary.dark
         },
   title: {
-    flex: "1 1 100%"
+    flexGrow: 1
   }
 }));
 
@@ -269,94 +314,152 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export function MenuAppBar() {
-    const classes = useStyles();
-    const [auth, setAuth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-
-   
   
-    const handleChange = (event) => {
-      setAuth(event.target.checked);
-    };
-  
-    const handleMenu = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-  
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+  const classes = useStyles();
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [isUser, setisUser] = useState(false);
 
-    const onLogout= useCallback(async () => {
-      let url = "http://localhost:8013/logout/"
-
-      axios({
-        method: "GET",
-        withCredentials: true,
-        url: url,
-      }).then((res) => {
-        if(res.status == 200){
-
-          history.push({
-            pathname: '/login'
-          })
-          
-        } else {
-          console.log("Error in Logging out the user!");
-        }
+  useEffect(() =>{
+   checkisUser();
+    
+  },[])
   
-      })
+  const open = Boolean(anchorEl);
+
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  
+
+  const onLogout= (async () => {
+    let url = "http://localhost:8013/logout/"
+
+    axios({
+      method: "GET",
+      withCredentials: true,
+      url: url,
+    }).then((res) => {
+      if(res.status == 200){
+
+        history.push({
+          pathname: '/login'
+        })
+        
+      } else {
+        console.log("Error in Logging out the user!");
+      }
 
     })
 
+  })
+
+
+
   
-    return (
-      <div className={classes.root}>
-       
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              PRVYCARD
-            </Typography>
-            {auth && (
-              <div>
-                   <IconButton
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={handleClose}
-                >
-                   <MenuItem onClick={()=> { onLogout() }}> Logout</MenuItem>
-                </Menu>
-              </div>
-            )}
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
+  function checkisUser(username){
+
+    let url = "http://localhost:8013/get_user";
+
+    axios({
+      method: "GET",
+      withCredentials: true,
+      url: url,
+    }).then((res) => {
+      console.log('Got response '+ res.status);
+  
+  
+      if(res.status == 200){
+         console.log("User logged in!");
+         setisUser(true);
+      }
+      if(res.status == 201){
+        console.log("admin logged in!");
+        setisUser(true);
+      }
+
+      if(res.status == 202){
+          console.log("user not logged in!");
+          setisUser(false);
+        }
+  
+          })
+
   }
+
+
+ 
+  
+
+  return (
+    <MuiThemeProvider theme={theme1}>
+
+    <div className={classes.root}>
+     
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h1" className={classes.title}>
+            PRVYCARD
+          </Typography>
+         
+          {isUser? <div>
+          {auth && (
+
+
+           <div>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+              
+
+                <MenuItem onClick={()=> { onLogout() }}> Logout</MenuItem>
+
+              </Menu>
+             
+            </div>            
+            
+          )}
+          </div>
+          : null}
+       
+        </Toolbar>
+      </AppBar>
+      
+    </div>
+    </MuiThemeProvider>
+
+  );
+              }
 
 function getRecordsToApprove(setRecords){
      
@@ -522,8 +625,10 @@ export default function EnhancedTable() {
 
 
   return (
-      <div>
+    <MuiThemeProvider theme={theme1}>
+    <div>
         <MenuAppBar/>     
+        
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} index={selected} rowss={rowss} setRecords={setRecords}/>
@@ -605,5 +710,6 @@ export default function EnhancedTable() {
       />
     </div>
      </div>
+     </MuiThemeProvider>
   );
 }

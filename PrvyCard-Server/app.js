@@ -190,7 +190,7 @@ passport.use(new LocalStrategy(
        console.log("User Found  : "+ user.pref_username)
           
              
-             if(user.pref_username === 'admin' && user.email == 'prvycard@gmail.com') {
+             if(user.pref_username === 'admin' && user.email == 'getprvy@gmail.com') {
                  flag = 1;
              } else {
                  flag = 2;
