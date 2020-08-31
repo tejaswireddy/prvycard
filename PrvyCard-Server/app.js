@@ -32,7 +32,7 @@ const dotenv = require('dotenv').config();
 app.use(bodyParser.json());
 //bodyparser for posting the form related Data
 app.use(bodyParser.urlencoded({ extended : false}))
-
+app.set('view engine', 'jade');
 
 const corsOptions = {
   credentials: true,

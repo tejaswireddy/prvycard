@@ -26,6 +26,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+app.set('view engine', 'jade');
 const nodemailer = require('nodemailer')
 const dotenv = require('dotenv').config();
 
