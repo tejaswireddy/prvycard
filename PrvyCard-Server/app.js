@@ -102,7 +102,7 @@ app.set('port',8013)
 
 //bodyparser for posting the form related Data
 app.use(bodyParser.urlencoded({ extended : false}))
-app.set('views', './src/views');
+app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res){
