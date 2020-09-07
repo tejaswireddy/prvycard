@@ -162,8 +162,117 @@ router.get('/profile',function(req, res,next){
   
 })
 
+router.get('/wrong_login',function(req, res,next){
+
+  console.log("wrong login!!");
+
+  res.status(202).send("error");
+
+})
+
+router.post('/login1',passport.authenticate('local',{session: false, failureRedirect:'/wrong_login' }),
+function(req, res, err){
+
+  console.log("After auth and user is : "+ req.user.pref_username );
+  req.logIn(req.user, err => {
+
+    if(flag == 2){
+      res.status(200).send("normal");
+ //res.redirect('/api/profile');
+    } else {
+        if(flag == 1){
+          res.status(201).send("admin");
+            //res.redirect('/api/admin');
+        }
+    }
+  })
+});
+
+router.post('/upload', (req, res) => {
+  if (req.files === null) {
+    return res.status(400).json({ msg: 'No file uploaded' });
+  }
+
+  const file = req.files.file;
+  var file_name = 'ksr.png';
+
+  file.mv(`./public/pics/${file_name}`, err => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+
+    res.json({ fileName: file_name, filePath: `./public/pics/${file.name}` });
+  });
+});
+
+router.post('/resetPass', function(req, res,next) {
+  var username= req.body.username;
+  var password = req.body.password;
+  var code = req.body.code;
+
+  console.log('Username : '+ username)
+  console.log('password : '+ password)
+  console.log('code : '+ code)
 
 
+  User.findOne({ 'pref_username': username}, function(err, user) {
+    if(user){
+
+      if(user.forgot_password_code != code){
+        res.status(202).send("code mismatch");
+        return;
+      } else {
+
+      user.password = password;
+
+      user.save(function(err, userUpdated) {
+        if (err) {
+          console.log(err)
+        } else {
+            User.cryptUser(userUpdated,function(err, user){
+                if(err) throw err;
+                console.log(user);
+          
+              })
+          console.log("User is updated : "+ userUpdated);
+          res.status(200).send("user password is updated succesfully");
+        }
+      });
+    }
+
+
+    } else {
+      console.log("User not found!");
+      res.status(201).send("user not found");
+    }
+
+
+})
+});
+
+router.get('/get_user', (req, res, next) => {
+
+  if(req.isAuthenticated()){
+    if(req.user.firstname == "admin"){
+      res.status(201).send({ user :  req.user});
+    } else {
+      res.status(200).send({ user :  req.user});
+    }
+    
+  } else {
+    res.status(202).send("user not authenticated!");
+  }
+  
+})
+
+router.get('/logout', function(req, res, next){
+   
+  req.logout();
+   res.status(200).send("User Logged out!");
+
+  
+ })
 
   router.post('/register', function(req, res,next) {
 
@@ -391,6 +500,3 @@ router.post('/forgot', function(req, res,next) {
   })
 
 })
-
-
-
