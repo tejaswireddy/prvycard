@@ -144,7 +144,7 @@ const sendRequest = useCallback(async (username,password) => {
     }
     if(res.status == 201){
       history.push({
-        pathname: '/admin',
+        pathname: '/admin1',
         state: { username: username }
       })
     }
@@ -182,7 +182,7 @@ const sendRequest = useCallback(async (username,password) => {
     }
     if(res.status == 201){
       history.push({
-        pathname: '/admin',
+        pathname: '/admin1',
         state: { username: username }
       })
     }
