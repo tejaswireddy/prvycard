@@ -118,7 +118,7 @@ const sendRequest = useCallback(async (username,password) => {
 
       setIsSending(true);
   //let res = await fetch("process.env.REACT_APP_EXPRESS_ENDPOINT+"/login1/?username="+username+"&password="+password,{ method: 'post',  credentials: 'same-origin',});
- let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/login1/"
+ let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/login1/"
 
   axios({
     method: "POST",
@@ -201,9 +201,6 @@ const sendRequest = useCallback(async (username,password) => {
 }
 
 })
-
-  
- 
 
   return (
     <MuiThemeProvider theme={theme}>
