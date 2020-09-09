@@ -206,8 +206,9 @@ passport.use(new LocalStrategy(
 
         if(isMatch){
        console.log("User Found  : "+ user.pref_username)
-          
-             
+          console.log("email"+process.env.EMAIL);
+             console.log("pref"+user.pref_username);
+          console.log(user.email);
              if(user.pref_username === 'admin' && user.email == process.env.EMAIL) {
                  flag = 1;
              } else {
