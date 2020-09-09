@@ -464,7 +464,7 @@ theme1.typography.h1 = {
                 
                 
                 function getProfile(username){
-                let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/get_profile/?username="+username;
+                let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/get_profile/?username="+username;
                 
                   axios.get(url)
                   .then(response => {
@@ -574,11 +574,11 @@ theme1.typography.h1 = {
                    
                 
                     let imagelocationurl =
-                    process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/get_imagelocation/?username="+username
+                    process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/get_imagelocation/?username="+username
                     
                      let ll = await axios.get(imagelocationurl)
                    
-                    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/get_vcard/?fullname="+FullName+"&username="+username+"&filelocation="+ll.data+"&home="+
+                    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/get_vcard/?fullname="+FullName+"&username="+username+"&filelocation="+ll.data+"&home="+
                     HomePhone+"&cell="+CellPhone+"&email="+Emaill+"&fax="+Faxx+"&linkedin="+LinkedInState+
                     "&twitter="+TwitterState+"&instagram="+InstagramState+"&facebook="+FacebookState+"&country="+Country+"&region="+Region
                     +"&address="+Address+"&bio="+Bio+"&reddit="+Reddit+"&pinterest="+Pinterest+"&Youtube="+
@@ -592,7 +592,7 @@ theme1.typography.h1 = {
                 
                     };
                 
-                    let getprofileimageurl = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/get_profileimage/?username="+props.match.params.username
+                    let getprofileimageurl = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/get_profileimage/?username="+props.match.params.username
                     let hrefurl = process.env.REACT_APP_EXPRESS_ENDPOINT+"/DisplayProfile/"+props.match.params.username
                     return (
                       <MuiThemeProvider theme={theme1}>
