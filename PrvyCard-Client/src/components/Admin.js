@@ -343,7 +343,7 @@ export function MenuAppBar() {
   
 
   const onLogout= (async () => {
-    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/logout/"
+    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/logout/"
 
     axios({
       method: "GET",
@@ -369,7 +369,7 @@ export function MenuAppBar() {
   
   function checkisUser(username){
 
-    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/get_user";
+    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/get_user";
 
     axios({
       method: "GET",
@@ -531,7 +531,7 @@ export default function EnhancedTable() {
 
   async function verifyAdmin(){
 
-    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/get_user/"
+    let url = process.env.REACT_APP_EXPRESS_ENDPOINT+"/api/get_user/"
     
     await axios({
       method: "GET",
