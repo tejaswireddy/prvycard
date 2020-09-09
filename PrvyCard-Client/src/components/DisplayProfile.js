@@ -641,7 +641,7 @@ theme1.typography.h1 = {
                           </Typography>
                           <br/>
                           <Link href={hrefurl} color="primary">
-          web link : http://localhost:3000/DisplayProfile/{props.match.params.username}
+          web link : https://prvycard.link/DisplayProfile/{props.match.params.username}
   </Link>
   <br/>
           {Emaill.showEmail?<Typography
