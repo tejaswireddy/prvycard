@@ -206,7 +206,7 @@ passport.use(new LocalStrategy(
 
         if(isMatch){
        console.log("User Found  : "+ user.pref_username)
-          console.log(user.pref_username);
+          console.log("pppp"+user.pref_username);
           console.log(user.email);
           console.log(process.env.EMAIL);
           if(user.pref_username === 'admin' && user.email == process.env.EMAIL) {
