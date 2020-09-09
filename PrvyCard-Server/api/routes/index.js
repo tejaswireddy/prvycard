@@ -174,8 +174,10 @@ router.post('/login1',passport.authenticate('local',{session: false, failureRedi
 function(req, res, err){
 
   console.log("After auth and user is : "+ req.user.pref_username );
+  console.log("flag"+flag);
+  
   req.logIn(req.user, err => {
-
+   console.log("loggeddddd");
     if(flag == 2){
       res.status(200).send("normal");
  //res.redirect('/api/profile');
