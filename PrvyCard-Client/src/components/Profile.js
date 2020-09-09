@@ -1069,7 +1069,7 @@ const handleContactChange = (event) => {
                             Contact 
                           </Typography>
           <Link href={hrefurl} color="primary">
-          web link : http://localhost:3000/DisplayProfile/{username}
+          web link : https://prvycard.link/DisplayProfile/{username}
   </Link>
   <br/>
           {Emaill.showEmail?<Typography
