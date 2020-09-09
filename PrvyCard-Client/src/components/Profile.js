@@ -430,7 +430,7 @@ if(method === "multer"){
  
   setMulterImage(URL.createObjectURL(e.target.files[0]));
   
-  axios.post('process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/uploadmulter/?username='+username,
+  axios.post(process.env.REACT_APP_EXPRESS_ENDPOINT+"/api1/uploadmulter/?username="+username,
     imageFormObj).then((data)=>{
     if(data.data.success){
       alert("image uploaded successfully");
