@@ -188,6 +188,53 @@ function(req, res, err){
   })
 });
 
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.getUserByUsername(username,function(err,user){
+
+      if(err) {return done(err);}
+
+      if(!user){
+        console.log("No user found");
+         return done(null,false,{message:'Unknown User!'});
+        }
+
+      User.comparePassword(password,user.password,function(err,isMatch){
+        if(err) {return done(err); }
+
+        if(isMatch){
+       console.log("User Found  : "+ user.pref_username)
+          
+             
+             if(user.pref_username === 'admin' && user.email == process.env.EMAIL) {
+                 flag = 1;
+             } else {
+                 flag = 2;
+             }
+
+              return done(null,user);
+        }
+          else {
+              return done(null, false, {
+                  message: "Invalid password"})
+
+           return done(null,false)
+         }
+         })
+})
+
+}));
+
+passport.serializeUser(function(user, done) {
+       return done(null, user);
+});
+
+passport.deserializeUser(function(id, done) {
+    User.getUserById(id, function(err, user) {
+      return done(err, user);
+});
+});
+
 router.post('/upload', (req, res) => {
   if (req.files === null) {
     return res.status(400).json({ msg: 'No file uploaded' });
@@ -500,3 +547,6 @@ router.post('/forgot', function(req, res,next) {
   })
 
 })
+
+
+
